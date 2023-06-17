@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+DEFAULT_CONFIG='{
+  "socks_host": "",
+  "socks_port": "",
+  "server": "",
+  "server_port": 22,
+  "server_username": "",
+  "server_password": "",
+  "check_url": "http://example.com",
+  "recheck_time_sec": 5,
+  "timeout": 5
+}'
+CONFIG_DIRECTORY="/etc/ssh-socks-checker"
+CONFIG_FILE="config.json"
+CONFIG_FILE_PATH="$CONFIG_DIRECTORY/$CONFIG_FILE"
+# daemon reload
+if [ "$1" = "configure" ]; then
+    systemctl daemon-reload
+fi
+# check config directory exists
+if [ ! -d $CONFIG_DIRECTORY ]; then 
+  mkdir -p $CONFIG_DIRECTORY
+  echo "Configs directory created!"
+fi
+if [ ! -f $CONFIG_FILE_PATH ]; then
+  touch $CONFIG_FILE_PATH
+
+  echo $DEFAULT_CONFIG | jq '.' > $CONFIG_FILE_PATH
+
+  echo "Config file created!"
+fi
