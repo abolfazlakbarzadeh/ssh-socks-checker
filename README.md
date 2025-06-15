@@ -4,8 +4,8 @@
 A very small Debian package for checking ssh-tunnel connectivity.
 
 # How it works?
-If your ssh-tunnel connection is lost, ssh-socks-checker will detect it and destroy the previous connection and establish a new ssh-tunnel connection automatically.
-It is very useful when the internet connection is weak.
+If your ssh-tunnel connection is lost, the ssh-socks-checker will detect it destroy the previous connection, and establish a new ssh-tunnel connection automatically.
+It is very useful when the internet connection is unstable.
 
 Dependencies:\
 `jq`\
